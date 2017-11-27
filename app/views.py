@@ -41,22 +41,19 @@ def login():
     error = None
     if request.method == 'POST':
 
-
         ## Validate user
         if request.form['first_name'] and request.form['last_name'] and request.form['id']:
             first_name = request.form['first_name']
             last_name = request.form['last_name']
             id = request.form['id']
 
-            if User.query.filter_by(first_name=first_name).first() and User.query.filter_by(
-                    last_name=last_name).first() and User.query.filter_by(id = id).first():
-                user = User.query.filter_by(first_name=first_name).first()
-                login_user(user)  ## built in 'flask login' method that creates a user session
-                return redirect(url_for('index'))
-            elif User.query.filter_by(first_name=first_name).first() is None and User.query.filter_by(last_name=last_name).first() and User.query.filter_by(id=id).first():
-                error = u'השם אינו תקין'
-            elif User.query.filter_by(last_name=last_name).first() is None and User.query.filter_by(first_name=first_name).first() and User.query.filter_by(id=id).first():
-                error = u'שם המשפחה אינו תקין'
+            user = User.query.filter_by(id=id).first()
+            if user.first_name == first_name and user.last_name == last_name:
+                if user.voted is False :
+                    login_user(user)  ## built in 'flask login' method that creates a user session
+                    return redirect(url_for('index'))
+                else :
+                    error  = u'הצבעתך התקבלה, תודה'
             else:  ##validation error
                 error = u'המצביע אינו מופיע במערכת'
         else:
