@@ -6,9 +6,9 @@ from app import db
 db.create_all()
 db.session.commit()
 
-admon = User('tomer', 'admon',False)
-tomer = User(u'תומר', u'אדמון',False)
-katrin = User('katrin', 'kroin',True)
+admon = User('tomer', 'admon','245789877',False)
+tomer = User(u'תומר', u'אדמון','245744857',False)
+katrin = User('katrin', 'kroin','324741131',True)
 
 avoda = Party(u'העבודה', 'https://www.am-1.org.il/wp-content/uploads/2015/03/%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%94.-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%99%D7%97%D7%A6.jpg')
 likud = Party(u'הליכוד', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Likud_Logo.svg/250px-Likud_Logo.svg.png')

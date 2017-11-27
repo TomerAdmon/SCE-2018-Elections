@@ -5,11 +5,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), index=True, unique=False)
     last_name = db.Column(db.String(120), index=True, unique=False)
+    id_num = db.Column(db.String(120), index=True, unique=False)
     voted = db.Column(db.BOOLEAN, index=True, unique=False)
 
-    def __init__(self, first_name, last_name,voted):
+    def __init__(self, first_name, last_name,id_num,voted):
         self.first_name = first_name
         self.last_name = last_name
+        self.id_num = id_num
         self.voted = voted
 
     @property

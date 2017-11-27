@@ -45,10 +45,10 @@ def login():
         if request.form['first_name'] and request.form['last_name'] and request.form['id']:
             first_name = request.form['first_name']
             last_name = request.form['last_name']
-            id = request.form['id']
+            id_num = request.form['id']
 
-            user = User.query.filter_by(id=id).first()
-            if user.first_name == first_name and user.last_name == last_name:
+            user = User.query.filter_by(id_num=id_num).first()
+            if user and user.first_name == first_name and user.last_name == last_name:
                 if user.voted is False :
                     login_user(user)  ## built in 'flask login' method that creates a user session
                     return redirect(url_for('index'))
