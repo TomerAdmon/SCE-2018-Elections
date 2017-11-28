@@ -13,6 +13,9 @@
       <h4>נא לבצע חיבור ראשוני למערכת</h4>
       <br>
       <form action="" method="post">
+        <label class="loginlabel" for="id">:תעודת זהות</label>
+        <input id="id" type="text" placeholder="תעודת זהות" align="right" name="id" value="{{
+          request.form.id }}">
         <label class="loginlabel" for="first_name">:שם פרטי</label>
         <input id="first_name" type="text" placeholder="שם פרטי" align="right" name="first_name" value="{{
           request.form.first_name }}">
