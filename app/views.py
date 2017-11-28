@@ -62,6 +62,8 @@ def login():
                 if user.voted is False:
                     login_user(user)  ## built in 'flask login' method that creates a user session
                     return redirect(url_for('index'))
+                else:
+                    error = u'ממשת כבר את בחירתך, תודה'
             else:  ##validation error
                 error = u'המצביע אינו מופיע במערכת'
         else:

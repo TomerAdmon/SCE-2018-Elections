@@ -27,4 +27,4 @@ db.session.add(shai)
 db.session.commit()
 users = User.query.all()
 
-print users
+print(users)
