@@ -1,22 +1,25 @@
 <html>
-  <head>
+  <head>>
     <link rel='icon' href='favicon.ico' type='image/png'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="static/all.css" rel="stylesheet" media="screen">
+    <script src="static/jquery.min.js"></script>
+    <script src="static/bootstrap.min.js"></script>
     {% if title %}
     <title>{{ title }} - בחירות</title>
     {% else %}
     <title>בחירות</title>
     {% endif %}
+
+    <style>
+      .modal-backdrop {
+
+        background-color: rgba(0,0,0,.0001) !important;
+        }
+    </style>
   </head>
   <body>
-    <div id="topbar">
-        {% if g.user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">יציאה</a>
-        {% endif %}
-    </div>
-
     {% block content %}{% endblock %}
   </body>
 </html>

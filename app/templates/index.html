@@ -2,12 +2,47 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
 
-
 {% block content %}
-    <div class="container" align="center">
+
+<script>
+
+    $(document).ready(function(){
+        $('#confirm-selection').on('click', '.btn-ok', function(e) {
+            var $modalDiv = $(e.delegateTarget);
+            var name = $(this).data('name');
+            $modalDiv.addClass('loading');
+            $.ajax({
+                url: '/index',
+                xhrFields: {
+                  withCredentials: true
+                },
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/x-www-form-urlencoded',
+                data: {party_name: name},
+                success: function( data, textStatus, jQxhr ){
+                     $modalDiv.modal('hide').removeClass('loading');
+                     window.location.replace("/login");
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    console.log( errorThrown );
+                }
+            });
+
+        });
+        $('#confirm-selection').on('show.bs.modal', function(e) {
+            var data = $("input:radio[name='party_name']:checked").val();
+            $('.title', this).text(data);
+            $('.btn-ok', this).data('name', data);
+        });
+    });
+</script>
+
+
+    <div dir="rtl" class="container" align="center">
         <h1 dir="rtl">ברוכים הבאים  , {{ user.first_name }}</h1>
         <h3 dir="rtl">לצורך הצבעה, בחר את המפלגה הרצויה ולחץ 'סיום'</h3>
-        <form method="post">
+        <div>
             {% for party in parties %}
             <div class="col-sm-12 col-xs-12 col-md-4 col-lg-3" style="padding: 5px">
                     <div class="form-check">
@@ -22,8 +57,30 @@
             </div>
         {% endfor %}
             <div class="submitbote">
-            <button type="submit" class="btn btn-primary">סיום</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#confirm-selection">סיום</button>
             </div>
-        </form>
+        </div>
+
+        <div dir="rtl" class="modal fade" id="confirm-selection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">האם אתה בטוח?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>בחרת ב: <b><i class="title"></i></b> .</p>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ביטול</button>
+                            <button type="button" class="btn btn-positive btn-ok">אישור</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 {% endblock %}
