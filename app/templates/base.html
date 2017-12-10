@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="static/all.css" rel="stylesheet" media="screen">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     {% if title %}
     <title>{{ title }} - בחירות</title>
     {% else %}
@@ -12,9 +14,7 @@
   </head>
   <body>
     <div id="topbar">
-        {% if g.user.is_authenticated %}
         <a href="{{ url_for('logout') }}">יציאה</a>
-        {% endif %}
     </div>
 
     {% block content %}{% endblock %}
